@@ -92,40 +92,6 @@ namespace StringUtilities
         [Output("Empty String")]
         public OutArgument<string> EmptyString { get; set; }
     }
-    public class DecodeHtml : CodeActivity
-    {
-        protected override void Execute(CodeActivityContext executionContext)
-        {
-            StringWriter myWriter = new StringWriter();
-            // Decode the encoded string.
-            HttpUtility.HtmlDecode(InputText.Get<string>(executionContext), myWriter);
-            string decodedString = myWriter.ToString();
-            DecodedHTML.Set(executionContext, decodedString);
-        }
-        [RequiredArgument]
-        [Input("Input Text")]
-        public InArgument<string> InputText { get; set; }
-
-        [Output("Decode HTML")]
-        public OutArgument<string> DecodedHTML { get; set; }
-    }
-    public class EncodeHtml : CodeActivity
-    {
-        protected override void Execute(CodeActivityContext executionContext)
-        {
-            StringWriter myWriter = new StringWriter();
-            string myDecodedString = myWriter.ToString();
-            // Encode the string.
-            string myEncodedString = HttpUtility.HtmlEncode(InputText.Get<string>(executionContext));
-            EncodedHTML.Set(executionContext, myEncodedString);
-        }
-        [RequiredArgument]
-        [Input("Input Text")]
-        public InArgument<string> InputText { get; set; }
-
-        [Output("Encode HTML")]
-        public OutArgument<string> EncodedHTML { get; set; }
-    }
     public class EndsWith : CodeActivity
     {
         protected override void Execute(CodeActivityContext executionContext)
@@ -455,32 +421,6 @@ namespace StringUtilities
 
         [Output("Removed HTML")]
         public OutArgument<string> RemovedHTMLText { get; set; }
-    }
-    public class UrlEncode : CodeActivity
-    {
-        protected override void Execute(CodeActivityContext executionContext)
-        {
-            UrlEncodedText.Set(executionContext, HttpUtility.UrlEncode(InputText.Get<string>(executionContext)));
-        }
-        [RequiredArgument]
-        [Input("Field to Update")]
-        public InArgument<string> InputText { get; set; }
-
-        [Output("Encoded URL")]
-        public OutArgument<string> UrlEncodedText { get; set; }
-    }
-    public class UrlDecode : CodeActivity
-    {
-        protected override void Execute(CodeActivityContext executionContext)
-        {
-            UrlDecodedText.Set(executionContext, HttpUtility.UrlDecode(InputText.Get<string>(executionContext)));
-        }
-        [RequiredArgument]
-        [Input("Field to Update")]
-        public InArgument<string> InputText { get; set; }
-
-        [Output("Decoded URL")]
-        public OutArgument<string> UrlDecodedText { get; set; }
     }
     public class WordCount : CodeActivity
     {
